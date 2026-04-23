@@ -1,0 +1,31 @@
+# Secrets — NEVER upload
+.env
+.env.local
+*.key
+*.pem
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Logs
+logs/
+*.log
+*.jsonl
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
