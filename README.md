@@ -8,8 +8,6 @@ NL-Shell turns plain English into Bash commands. You describe what you want — 
 
 Unlike a typical AI agent, **NL-Shell never executes commands on your behalf**. It's strictly advisory. The AI suggests, a layered safety engine gates the result, and the human makes the final call.
 
-\---
-
 ## Key Features
 
 * **Plain-English to Bash** via Groq's LLaMA-3.3-70B (≈1 second latency)
@@ -19,8 +17,6 @@ Unlike a typical AI agent, **NL-Shell never executes commands on your behalf**. 
 * **Multi-turn conversations** — follow-up questions like *"now kill that process"* resolve against prior context
 * **Dual-format audit logging** — every session written to both a human-readable `.log` and a machine-readable `.jsonl`
 * **Cinematic CLI** — typewriter output and threaded progress bars that reflect real work, not cosmetic pauses
-
-\---
 
 ## How it works
 
@@ -63,8 +59,6 @@ Every request flows through four stages:
   AI diagnoses → suggests fix → marked SELF-HEALED
 ```
 
-\---
-
 ## Demo
 
 ```
@@ -103,8 +97,6 @@ For a high-risk command:
    !!  Enter confirmation code: \_
 ```
 
-\---
-
 ## Installation
 
 ### Prerequisites
@@ -138,8 +130,6 @@ python ui.py
 # Open http://localhost:7860 in your browser
 ```
 
-\---
-
 ## Project structure
 
 ```
@@ -165,8 +155,6 @@ Each module has one job:
 |`main.py`|Orchestrates the pipeline. Returns a dict — does not print, does not execute.|
 |`cli.py`|Renders results to the terminal. Handles the risk gate UX and the self-heal prompt.|
 |`ui.py`|Alternative front-end. Shares the same `main.run\_pipeline()` backend.|
-
-\---
 
 ## Safety model
 
@@ -206,8 +194,6 @@ The command is shown with a prominent warning panel. One-click confirmation. Exa
 
 Shown immediately with no warning. Covers read-only commands (`ls`, `cat`, `grep`, `ps`, `df`) and safe utilities.
 
-\---
-
 ## Design philosophy
 
 **Advisory, not autonomous.** Most AI tools execute commands on your behalf. NL-Shell deliberately doesn't. The AI is a teacher and an assistant; the human is the decision-maker. This trade-off — less autonomy, more trust — is the central design choice.
@@ -215,8 +201,6 @@ Shown immediately with no warning. Covers read-only commands (`ls`, `cat`, `grep
 **Layered defense.** The AI can be fooled by a clever prompt. Regex rules can't. The safety classifier runs *after* the AI, so no matter how the model is tricked, commands still have to pass through deterministic pattern checks.
 
 **Observability.** Every interaction is written to two log files — one for humans to read, one for programs to parse. When the backend is a non-deterministic model, being able to replay and inspect sessions isn't optional.
-
-\---
 
 ## What we learned
 
@@ -226,7 +210,6 @@ Shown immediately with no warning. Covers read-only commands (`ls`, `cat`, `grep
 * **`cli.py`** — A command that appears instantly feels unsafe. Threaded progress bars with named stages give the user time to read before deciding. Pacing is a safety feature.
 * **`main.py`** — Keeping the pipeline a pure function (input → dict, no print, no subprocess) meant the same backend powers both the CLI and the Gradio UI without changes.
 
-\---
 
 ## Known limitations
 
@@ -235,7 +218,6 @@ Shown immediately with no warning. Covers read-only commands (`ls`, `cat`, `grep
 * **No unit tests.** Each module has a `\_\_main\_\_` smoke test, but no pytest harness yet.
 * **English-only.** The system prompt and classifier messages are English. Multilingual support would require prompt translation and locale-aware rules.
 
-\---
 
 ## Built with
 
@@ -244,7 +226,6 @@ Shown immediately with no warning. Covers read-only commands (`ls`, `cat`, `grep
 * [**Gradio**](https://www.gradio.app/) — Optional web interface
 * [**python-dotenv**](https://github.com/theskumar/python-dotenv) — Environment variable loading
 
-\---
 
 ## Authors
 
@@ -254,7 +235,6 @@ Shown immediately with no warning. Covers read-only commands (`ls`, `cat`, `grep
 
 Operating Systems course project, April 2026.
 
-\---
 
 ## License
 
